@@ -1,36 +1,82 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# O’MIEL — site vitrine
 
-## Getting Started
+Site vitrine de **O’MIEL**, apiculture artisanale en Guadeloupe : miels de terroir, formations à
+l’apiculture et biosurveillance environnementale.
 
-First, run the development server:
+## Stack
+
+- [Next.js 16](https://nextjs.org) (App Router, Turbopack) et React 19
+- TypeScript
+- Tailwind CSS v4
+- Pages entièrement statiques (prérendues au build)
+
+## Démarrer
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev     # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Autres commandes :
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build   # build de production
+npm run start   # sert le build de production
+npm run lint    # ESLint
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Structure
 
-## Learn More
+```
+src/
+  app/
+    layout.tsx            en-tête, pied de page, polices, métadonnées globales
+    page.tsx              accueil
+    a-propos/             histoire du rucher, valeurs, savoir-faire
+    formations/           catalogue des formations et modalités
+    boutique/             catalogue produits (vitrine, commande par contact)
+    biosurveillance/      démarche, matrices analysées, déroulé d'une campagne
+    contact/              coordonnées et formulaire
+    mentions-legales/     mentions légales et RGPD
+    not-found.tsx         page 404
+    sitemap.ts            sitemap.xml
+    robots.ts             robots.txt
+    globals.css           palette et styles de base
+  components/
+    site-header.tsx       navigation principale (client, menu mobile)
+    site-footer.tsx       pied de page
+    ui.tsx                briques partagées (Container, PageHero, Section, Card, ButtonLink, CtaBand)
+    contact-form.tsx      formulaire de contact
+  lib/
+    site.ts               coordonnées, navigation, mentions légales
+    catalogue.ts          produits et formations
+```
 
-To learn more about Next.js, take a look at the following resources:
+## À compléter avant la mise en ligne
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Tous les contenus à remplacer sont marqués `TODO` dans le code. Les principaux :
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- **`src/lib/site.ts`** — e-mail, téléphone, adresse, horaires, réseaux sociaux, domaine définitif
+  (`site.url`, utilisé par le sitemap et les balises Open Graph), et le bloc `legal`
+  (forme juridique, SIRET, responsable de publication, hébergeur réel).
+- **`src/lib/catalogue.ts`** — produits, formats, tarifs et formations réels.
+- **Pages** — les paragraphes d’histoire (`/a-propos`), les modalités de formation, les mentions
+  réglementaires des produits et les références de campagnes de biosurveillance.
+- **Visuels** — le site n’utilise aujourd’hui que le logo. Ajouter des photos du rucher et des
+  produits dans `public/`, puis les afficher avec `next/image`.
+- **OG image** — déposer un `src/app/opengraph-image.png` (1200 × 630) pour les partages sociaux.
 
-## Deploy on Vercel
+## Formulaire de contact
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Le formulaire ne fait **aucun appel réseau** : il ouvre le logiciel de messagerie du visiteur avec
+un message pré-rempli. Aucune donnée n’est stockée, ce qui évite toute obligation RGPD côté
+serveur.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Pour passer à un envoi côté serveur, remplacer `handleSubmit` dans
+`src/components/contact-form.tsx` par une Server Action branchée sur un service d’e-mail
+transactionnel (Resend, Brevo…), et afficher l’état avec `useActionState`.
+
+## Déploiement
+
+Le site est entièrement statique et se déploie tel quel sur Vercel. Penser à mettre `site.url` à
+jour avec le domaine réel avant le premier déploiement en production.
