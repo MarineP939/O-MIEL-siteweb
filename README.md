@@ -17,6 +17,9 @@ npm install
 npm run dev     # http://localhost:3000
 ```
 
+Pas familier du projet ? [**DEMARRAGE.md**](./DEMARRAGE.md) détaille la marche à suivre pas à pas,
+prérequis et dépannage compris.
+
 Autres commandes :
 
 ```bash
