@@ -6,6 +6,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Mentions légales",
   description: "Mentions légales, hébergement et politique de confidentialité du site O’MIEL.",
+  alternates: { canonical: "/mentions-legales" },
   robots: { index: false, follow: true },
 };
 
@@ -47,6 +48,8 @@ export default function MentionsLegalesPage() {
             </section>
 
             <section>
+              {/* TODO : hébergeur à confirmer, voir `site.legal.host` dans src/lib/site.ts.
+                  Les coordonnées affichées ici sont provisoires. */}
               <h2 className="font-title text-2xl font-semibold text-nuit">Hébergement</h2>
               <p className="mt-4">
                 {legal.host.name}

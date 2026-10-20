@@ -1,11 +1,26 @@
 import type { Metadata } from "next";
 
+import { JsonLd } from "@/components/json-ld";
 import { Card, CtaBand, PageHero, Section } from "@/components/ui";
+import { breadcrumbJsonLd, organisationJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Biosurveillance",
+  title: "Biosurveillance apicole",
   description:
     "La biosurveillance environnementale par l’abeille en Guadeloupe : matrices analysables, déroulé d’une campagne et publics concernés.",
+  alternates: { canonical: "/biosurveillance" },
+};
+
+/** Prestation de suivi environnemental, déclarée comme service. */
+const serviceJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: "Biosurveillance environnementale par l’abeille",
+  description:
+    "Installation de ruches sentinelles et analyse en laboratoire des matrices de la ruche pour suivre la biodiversité florale et les polluants d’un site.",
+  serviceType: "Biosurveillance environnementale",
+  provider: { "@id": organisationJsonLd["@id"] },
+  areaServed: { "@type": "AdministrativeArea", name: "Guadeloupe" },
 };
 
 const matrices = [
@@ -94,6 +109,9 @@ const publics = [
 export default function BiosurveillancePage() {
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd([{ name: "Biosurveillance", path: "/biosurveillance" }])} />
+      <JsonLd data={serviceJsonLd} />
+
       <PageHero
         eyebrow="Biosurveillance"
         title="L’abeille, sentinelle de l’environnement."

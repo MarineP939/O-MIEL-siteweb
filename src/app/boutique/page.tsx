@@ -14,12 +14,50 @@ import {
   specialitesGourmandes,
   type Produit,
 } from "@/lib/catalogue";
+import { JsonLd } from "@/components/json-ld";
+import { breadcrumbJsonLd, produitJsonLd } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Boutique",
   description:
     "Le catalogue officiel de la SCEA Ô MIEL : spécialités gourmandes, élixirs de la ruche, gammes de miel de Guadeloupe et coffrets personnalisés.",
+  alternates: { canonical: "/boutique" },
+};
+
+/**
+ * Catalogue déclaré à schema.org, pour que les prix et les formats puissent
+ * remonter en résultat enrichi.
+ *
+ * Les coffrets en sont absents : sans prix fixé, une fiche produit sans offre
+ * n'apporte rien et brouille le balisage.
+ */
+const catalogueJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  name: "Catalogue O’MIEL",
+  itemListElement: [
+    ...miels.map((miel) =>
+      produitJsonLd({
+        name:
+          miel.denomination === miel.name ? miel.name : `${miel.name} — ${miel.denomination}`,
+        description: miel.description,
+        prices: formatsMiel
+          .filter((format) => miel.formats.includes(format.key))
+          .map((format) => format.price),
+      }),
+    ),
+    ...[...autourDuMiel, ...specialitesGourmandes, ...elixirs].map((produit) =>
+      produitJsonLd({
+        name: produit.name,
+        description: produit.description,
+        image: produit.image?.src,
+        prices: produit.tarifs
+          .map((tarif) => tarif.price)
+          .filter((price): price is number => price !== null),
+      }),
+    ),
+  ].map((item, index) => ({ "@type": "ListItem", position: index + 1, item })),
 };
 
 const etapesCommande = [
@@ -90,6 +128,9 @@ function ProduitCard({ produit }: { produit: Produit }) {
 export default function BoutiquePage() {
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd([{ name: "Boutique", path: "/boutique" }])} />
+      <JsonLd data={catalogueJsonLd} />
+
       <PageHero
         eyebrow="Boutique"
         title="Le catalogue des miels et produits de la ruche."

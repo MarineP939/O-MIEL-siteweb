@@ -167,7 +167,7 @@ export const specialitesGourmandes: Produit[] = [
     ],
     image: {
       src: "/produits/caramiel.jpg",
-      alt: "Bocal de Caramiel, caramel au beurre salé et au miel de la SCEA Ô MIEL",
+      alt: "Bocal de Caramiel, caramel au beurre salé au miel de Guadeloupe de la SCEA Ô MIEL",
     },
   },
   {
@@ -179,7 +179,7 @@ export const specialitesGourmandes: Produit[] = [
     tarifs: [{ label: "Bocal 250 g", price: 12 }],
     image: {
       src: "/produits/miel-gingembre.jpg",
-      alt: "Bocal de miel de gingembre candi O’MIEL, 250 g",
+      alt: "Bocal de miel de gingembre candi de Guadeloupe O’MIEL, 250 g",
     },
   },
   {
@@ -194,7 +194,7 @@ export const specialitesGourmandes: Produit[] = [
     ],
     image: {
       src: "/produits/pain-d-epices.jpg",
-      alt: "Pains d’épices artisanaux au miel O’MIEL, formats individuel et familial",
+      alt: "Pains d’épices artisanaux au miel de Guadeloupe, formats individuel et familial",
     },
   },
 ];
@@ -216,7 +216,7 @@ export const elixirs: Produit[] = [
     tarifs: [{ label: "Bouteille ½ litre", price: 14 }],
     image: {
       src: "/produits/hydromel.jpg",
-      alt: "Bouteille d’hydromel O’MIEL de ½ litre",
+      alt: "Bouteille d’hydromel O’MIEL de ½ litre, élaborée en Guadeloupe",
     },
   },
   {
@@ -240,7 +240,7 @@ export const coffrets = {
   tarif: "Sur devis",
   image: {
     src: "/produits/coffret-caramiel-miel.jpg",
-    alt: "Coffret cadeau O’MIEL réunissant un bocal de miel et un bocal de Caramiel",
+    alt: "Coffret cadeau réunissant un bocal de miel de Guadeloupe et un bocal de Caramiel",
   },
 } as const;
 

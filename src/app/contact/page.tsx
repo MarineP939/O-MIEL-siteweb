@@ -2,13 +2,23 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 
 import { ContactForm } from "@/components/contact-form";
+import { JsonLd } from "@/components/json-ld";
 import { Container, PageHero } from "@/components/ui";
+import { absoluteUrl, breadcrumbJsonLd, organisationJsonLd } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Contacter O’MIEL en Guadeloupe : commandes de miel, inscriptions aux formations et projets de biosurveillance.",
+    "Contacter la SCEA Ô MIEL à Petit-Canal en Guadeloupe : commandes de miel, inscriptions aux formations et projets de biosurveillance.",
+  alternates: { canonical: "/contact" },
+};
+
+const contactJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  url: absoluteUrl("/contact"),
+  mainEntity: { "@id": organisationJsonLd["@id"] },
 };
 
 const coordonnees = [
@@ -32,6 +42,9 @@ const coordonnees = [
 export default function ContactPage() {
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd([{ name: "Contact", path: "/contact" }])} />
+      <JsonLd data={contactJsonLd} />
+
       <PageHero
         eyebrow="Contact"
         title="Parlons de votre projet."
