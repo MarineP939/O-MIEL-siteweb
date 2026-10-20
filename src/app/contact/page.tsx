@@ -22,6 +22,11 @@ const coordonnees = [
     value: site.contact.phone,
     href: `tel:${site.contact.phoneHref}`,
   },
+  {
+    label: "Instagram",
+    value: site.social.instagramHandle,
+    href: site.social.instagram,
+  },
 ];
 
 export default function ContactPage() {
@@ -58,7 +63,13 @@ export default function ContactPage() {
                         {item.label}
                       </dt>
                       <dd className="mt-1">
-                        <a href={item.href} className="text-miel-700 underline">
+                        <a
+                          href={item.href}
+                          {...(item.href.startsWith("http")
+                            ? { target: "_blank", rel: "noreferrer noopener" }
+                            : {})}
+                          className="text-miel-700 underline"
+                        >
                           {item.value}
                         </a>
                       </dd>
@@ -66,30 +77,52 @@ export default function ContactPage() {
                   ))}
                   <div>
                     <dt className="font-semibold uppercase tracking-[0.2em] text-nuit/40">
-                      Adresse
+                      Siège
                     </dt>
                     <dd className="mt-1 leading-7 text-nuit/75">
                       {site.contact.address.street}
                       <br />
                       {site.contact.address.postalCode} {site.contact.address.city}
+                      <br />
+                      {site.contact.address.country}
                     </dd>
-                  </div>
-                  <div>
-                    <dt className="font-semibold uppercase tracking-[0.2em] text-nuit/40">
-                      Horaires
-                    </dt>
-                    <dd className="mt-1 leading-7 text-nuit/75">{site.contact.hours}</dd>
                   </div>
                 </dl>
               </div>
 
+              <div className="rounded-3xl border border-miel-200/70 bg-white p-8 shadow-sm">
+                <h2 className="font-title text-xl font-semibold text-nuit">
+                  Commandes &amp; contacts directs
+                </h2>
+                <ul className="mt-5 space-y-4 text-sm">
+                  {site.contactsDirects.map((personne) => (
+                    <li key={personne.phoneHref}>
+                      <p className="font-semibold text-nuit">{personne.name}</p>
+                      <a
+                        href={`tel:${personne.phoneHref}`}
+                        className="mt-1 inline-block text-miel-700 underline"
+                      >
+                        {personne.phone}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
               <div className="rounded-3xl bg-feuille-200/40 p-8">
-                <h2 className="font-title text-xl font-semibold text-nuit">Visiter le rucher</h2>
+                <h2 className="font-title text-xl font-semibold text-nuit">Nous suivre</h2>
                 <p className="mt-3 text-sm leading-7 text-nuit/70">
-                  {/* TODO : préciser les conditions de visite réelles, ou retirer ce bloc. */}
-                  Les visites se font uniquement sur rendez-vous, pour la tranquillité des colonies
-                  et votre sécurité. Contactez-nous pour convenir d&rsquo;un créneau.
+                  Récoltes en cours, nouveaux produits et disponibilités de fin d&rsquo;année : les
+                  actualités du rucher sont publiées sur Instagram.
                 </p>
+                <a
+                  href={site.social.instagram}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-feuille-700 underline"
+                >
+                  {site.social.instagramHandle}
+                </a>
               </div>
             </aside>
           </div>
