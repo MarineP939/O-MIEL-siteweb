@@ -5,10 +5,18 @@
  * - miel   : le brun doré du mot « Miel »
  * - feuille: le vert des gouttes
  * - nuit   : le noir de l'hexagone
+ * - rubis  : le rouge profond du satin des photos produits, réservé aux
+ *            mises en avant commerciales (remise, offres limitées).
  */
 @theme {
   --color-creme: #fdf8f0;
   --color-creme-fonce: #f6ecdc;
+
+  --color-rubis-100: #fbeaea;
+  --color-rubis-200: #f2cbcb;
+  --color-rubis-500: #b4232c;
+  --color-rubis-600: #991c24;
+  --color-rubis-700: #7a151c;
 
   --color-miel-100: #f7ecdd;
   --color-miel-200: #ecd7ba;
