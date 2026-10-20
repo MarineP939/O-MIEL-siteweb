@@ -1,8 +1,10 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 
+import { JsonLd } from "@/components/json-ld";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { organisationJsonLd, siteJsonLd } from "@/lib/seo";
 import { site } from "@/lib/site";
 
 import "./globals.css";
@@ -30,6 +32,9 @@ export const metadata: Metadata = {
     template: `%s | ${site.name}`,
   },
   description: site.description,
+  applicationName: site.name,
+  // Les pages intérieures surchargent cette valeur avec leur propre chemin.
+  alternates: { canonical: "/" },
   openGraph: {
     type: "website",
     locale: site.locale,
@@ -38,6 +43,27 @@ export const metadata: Metadata = {
     description: site.description,
     url: site.url,
   },
+  twitter: {
+    card: "summary_large_image",
+    title: `${site.name} | ${site.baseline}`,
+    description: site.description,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+};
+
+export const viewport: Viewport = {
+  themeColor: "#fdf8f0",
+  colorScheme: "light",
 };
 
 export default function RootLayout({
@@ -62,6 +88,8 @@ export default function RootLayout({
           {children}
         </main>
         <SiteFooter />
+        <JsonLd data={organisationJsonLd} />
+        <JsonLd data={siteJsonLd} />
       </body>
     </html>
   );

@@ -1,13 +1,23 @@
 import type { Metadata } from "next";
 
+import { JsonLd } from "@/components/json-ld";
 import { ButtonLink, Card, CtaBand, PageHero, Section } from "@/components/ui";
 import { formations } from "@/lib/catalogue";
+import { breadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  title: "Formations",
+  title: "Formations à l’apiculture",
   description:
     "Formations à l’apiculture en Guadeloupe : découverte, conduite de rucher en milieu tropical, santé de la colonie et interventions sur mesure.",
+  alternates: { canonical: "/formations" },
 };
+
+/*
+ * Pas de balisage `Course` ici, volontairement : intitulés, durées et tarifs
+ * sont encore des exemples en attendant le catalogue réel. Déclarer des
+ * formations fictives à Google exposerait à une action manuelle.
+ * TODO : ajouter le balisage une fois le vrai catalogue intégré.
+ */
 
 const modalites = [
   {
@@ -27,6 +37,8 @@ const modalites = [
 export default function FormationsPage() {
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd([{ name: "Formations", path: "/formations" }])} />
+
       <PageHero
         eyebrow="Formations"
         title="Apprendre l’apiculture, les mains dans la ruche."

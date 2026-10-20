@@ -1,13 +1,17 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 
+import { JsonLd } from "@/components/json-ld";
 import { ButtonLink, Card, CtaBand, PageHero, Section } from "@/components/ui";
+import { coffrets } from "@/lib/catalogue";
 import { equipe } from "@/lib/equipe";
+import { breadcrumbJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "À propos",
   description:
     "L’histoire de la SCEA Ô MIEL en Guadeloupe : vingt ans de conseil apicole, trois médailles d’or au Concours Général de Paris et une équipe au croisement de la science et du terrain.",
+  alternates: { canonical: "/a-propos" },
 };
 
 const distinctions = [
@@ -46,6 +50,8 @@ const missions = [
 export default function AboutPage() {
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd([{ name: "À propos", path: "/a-propos" }])} />
+
       <PageHero
         eyebrow="À propos"
         title="L’histoire d’une passion devenue vocation."
@@ -176,8 +182,8 @@ export default function AboutPage() {
 
           <div className="overflow-hidden rounded-3xl border border-miel-200/70 bg-white shadow-[0_20px_60px_-24px_rgba(116,85,47,0.45)]">
             <Image
-              src="/produits/coffret-caramiel-miel.jpg"
-              alt="Coffret cadeau O’MIEL réunissant un bocal de miel et un bocal de Caramiel"
+              src={coffrets.image.src}
+              alt={coffrets.image.alt}
               width={1196}
               height={896}
               className="h-full w-full object-cover"

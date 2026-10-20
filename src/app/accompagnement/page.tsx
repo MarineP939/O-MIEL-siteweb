@@ -1,12 +1,30 @@
 import type { Metadata } from "next";
 
+import { JsonLd } from "@/components/json-ld";
 import { ButtonLink, Card, CtaBand, PageHero, Section } from "@/components/ui";
 import { accompagnement } from "@/lib/catalogue";
+import { breadcrumbJsonLd, organisationJsonLd } from "@/lib/seo";
 
 export const metadata: Metadata = {
   title: "Accompagnement",
   description:
     "Conseil et montage de dossiers FEADER / FEDER en Guadeloupe : un ingénieur conseil apicole vous accompagne de la définition du projet jusqu’au versement de la subvention.",
+  alternates: { canonical: "/accompagnement" },
+};
+
+/** Prestation de conseil, déclarée comme service rattaché à l'entreprise. */
+const serviceJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  name: accompagnement.title,
+  description: accompagnement.intro,
+  serviceType: "Conseil et montage de dossiers de financement agricole",
+  provider: { "@id": organisationJsonLd["@id"] },
+  areaServed: { "@type": "AdministrativeArea", name: "Guadeloupe" },
+  audience: {
+    "@type": "Audience",
+    audienceType: accompagnement.publics.join(", "),
+  },
 };
 
 export default function AccompagnementPage() {
@@ -14,6 +32,9 @@ export default function AccompagnementPage() {
 
   return (
     <>
+      <JsonLd data={breadcrumbJsonLd([{ name: "Accompagnement", path: "/accompagnement" }])} />
+      <JsonLd data={serviceJsonLd} />
+
       <PageHero
         eyebrow="Accompagnement"
         title="Monter votre dossier de financement, sans y laisser vos saisons."
