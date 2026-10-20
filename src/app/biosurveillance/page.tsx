@@ -50,11 +50,45 @@ const etapes = [
   },
 ];
 
+const axes = [
+  {
+    title: "Biodiversité florale",
+    text: "L’analyse pollinique des récoltes dresse l’inventaire des espèces réellement butinées autour du site, et suit son évolution d’une campagne à l’autre.",
+  },
+  {
+    title: "Polluants",
+    text: "La recherche de résidus dans les matrices de la ruche documente l’exposition du site : produits phytosanitaires, métaux, composés persistants.",
+  },
+];
+
+const criteresDevis = [
+  "Les analyses retenues en laboratoire : biodiversité florale, polluants, ou les deux",
+  "Le nombre de ruches sentinelles installées",
+  "Le nombre d’analyses réalisées dans l’année",
+  "L’organisation éventuelle d’un séminaire de restitution",
+  "La zone et la localisation du site à surveiller",
+];
+
+const benefices = [
+  {
+    title: "Un suivi de pollution tangible",
+    text: "Des mesures régulières, issues d’un laboratoire, qui documentent dans la durée l’exposition réelle de votre site.",
+  },
+  {
+    title: "Une marque employeur renforcée",
+    text: "Un rucher sentinelle se visite, se raconte et se partage. C’est un engagement environnemental que vos équipes voient et comprennent.",
+  },
+  {
+    title: "Un dialogue facilité",
+    text: "Là où un tableau de mesures reste abstrait, l’abeille parle immédiatement aux riverains, aux collectivités et aux partenaires.",
+  },
+];
+
 const publics = [
   "Collectivités et gestionnaires d’espaces naturels",
   "Sites industriels et installations classées",
   "Exploitations agricoles et coopératives",
-  "Établissements scolaires et projets pédagogiques",
+  "Entreprises engagées dans une démarche environnementale",
 ];
 
 export default function BiosurveillancePage() {
@@ -128,7 +162,59 @@ export default function BiosurveillancePage() {
         </p>
       </Section>
 
-      <Section className="border-t border-miel-100 bg-white/70" title="À qui cela s’adresse">
+      <Section
+        className="border-y border-miel-100 bg-white/70"
+        eyebrow="Analyses"
+        title="Deux axes de mesure"
+        description="Selon vos objectifs, les prélèvements sont orientés vers l’un de ces axes ou vers les deux."
+      >
+        <div className="grid gap-6 md:grid-cols-2">
+          {axes.map((axe) => (
+            <Card key={axe.title}>
+              <h3 className="font-title text-xl font-semibold text-nuit">{axe.title}</h3>
+              <p className="mt-3 text-sm leading-7 text-nuit/70">{axe.text}</p>
+            </Card>
+          ))}
+        </div>
+      </Section>
+
+      <Section eyebrow="Bénéfices" title="Ce que le dispositif vous apporte">
+        <div className="grid gap-6 md:grid-cols-3">
+          {benefices.map((benefice) => (
+            <Card key={benefice.title}>
+              <h3 className="font-title text-lg font-semibold text-nuit">{benefice.title}</h3>
+              <p className="mt-3 text-sm leading-7 text-nuit/70">{benefice.text}</p>
+            </Card>
+          ))}
+        </div>
+      </Section>
+
+      <Section className="border-y border-miel-100 bg-white/70" eyebrow="Tarification" title="Chaque dispositif fait l’objet d’un devis">
+        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
+          <p className="text-base leading-8 text-nuit/75">
+            Aucun forfait ne pourrait couvrir des situations aussi différentes qu&rsquo;un site
+            industriel urbain et une exploitation agricole isolée. Le montant est donc construit à
+            partir de votre cahier des charges, et vous est remis avant tout engagement.
+          </p>
+          <div className="rounded-3xl border border-miel-200/70 bg-white p-8 shadow-sm">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-miel-600">
+              Le devis dépend de
+            </p>
+            <ul className="mt-5 space-y-3 text-sm leading-7 text-nuit/75">
+              {criteresDevis.map((critere) => (
+                <li key={critere} className="flex gap-3">
+                  <span aria-hidden className="text-miel-400">
+                    •
+                  </span>
+                  <span>{critere}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </Section>
+
+      <Section title="À qui cela s’adresse">
         <ul className="grid gap-3 sm:grid-cols-2">
           {publics.map((item) => (
             <li

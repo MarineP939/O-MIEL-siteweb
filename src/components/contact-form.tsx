@@ -18,6 +18,7 @@ import { site } from "@/lib/site";
 const SUBJECTS = [
   { value: "commande", label: "Commande de miel" },
   { value: "formation", label: "Formation" },
+  { value: "accompagnement", label: "Conseil et montage de dossier" },
   { value: "biosurveillance", label: "Biosurveillance" },
   { value: "professionnel", label: "Demande professionnelle / revendeur" },
   { value: "autre", label: "Autre" },

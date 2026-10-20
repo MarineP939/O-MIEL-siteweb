@@ -3,8 +3,6 @@ import Link from "next/link";
 import { footerNav, mainNav, site } from "@/lib/site";
 
 export function SiteFooter() {
-  const socials = Object.entries(site.social).filter(([, url]) => url !== "");
-
   return (
     <footer className="mt-auto border-t border-miel-100 bg-nuit text-creme">
       <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 sm:px-8 md:grid-cols-3 lg:px-12">
@@ -53,25 +51,19 @@ export function SiteFooter() {
               {site.contact.address.street}
               <br />
               {site.contact.address.postalCode} {site.contact.address.city}
+              <br />
+              {site.contact.address.country}
             </li>
           </ul>
 
-          {socials.length > 0 ? (
-            <ul className="mt-4 flex gap-4 text-sm">
-              {socials.map(([network, url]) => (
-                <li key={network}>
-                  <a
-                    href={url}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                    className="capitalize text-creme/75 transition hover:text-miel-400"
-                  >
-                    {network}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          ) : null}
+          <a
+            href={site.social.instagram}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="mt-4 inline-block text-sm text-creme/75 transition hover:text-miel-400"
+          >
+            Instagram {site.social.instagramHandle}
+          </a>
         </div>
       </div>
 
