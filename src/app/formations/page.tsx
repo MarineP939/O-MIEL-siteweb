@@ -115,6 +115,7 @@ export default function FormationsPage() {
         title="Une question avant de vous inscrire ?"
         text="Dites-nous votre niveau et ce que vous cherchez : nous vous orienterons vers la bonne session."
         primary={{ href: "/contact", label: "Poser une question" }}
+        secondary={{ href: "/accompagnement", label: "Financer votre projet" }}
       />
     </>
   );
