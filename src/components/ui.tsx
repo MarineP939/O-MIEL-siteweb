@@ -25,13 +25,13 @@ export function PageHero({
   intro: string;
 }) {
   return (
-    <section className="border-b border-miel-100 bg-[radial-gradient(circle_at_top_right,var(--color-miel-100),transparent_60%)] py-16 sm:py-20">
+    <section className="border-b border-miel-100 bg-[radial-gradient(circle_at_top_right,var(--color-miel-100),transparent_60%)] py-8 sm:py-10">
       <Container>
         <p className="text-sm font-semibold uppercase tracking-[0.3em] text-miel-600">{eyebrow}</p>
         <h1 className="mt-4 max-w-3xl font-title text-4xl font-semibold tracking-tight text-nuit sm:text-5xl">
           {title}
         </h1>
-        <p className="mt-6 max-w-2xl text-lg leading-8 text-nuit/70">{intro}</p>
+        <p className="mt-5 max-w-2xl text-lg leading-8 text-nuit/70">{intro}</p>
       </Container>
     </section>
   );
@@ -52,7 +52,7 @@ export function Section({
   className?: string;
 }) {
   return (
-    <section className={`py-16 sm:py-20 ${className}`}>
+    <section className={`py-10 sm:py-14 ${className}`}>
       <Container>
         {eyebrow ? (
           <p className="text-sm font-semibold uppercase tracking-[0.3em] text-miel-600">{eyebrow}</p>
@@ -63,25 +63,33 @@ export function Section({
           </h2>
         ) : null}
         {description ? (
-          <p className="mt-4 max-w-3xl text-lg leading-8 text-nuit/70">{description}</p>
+          <p className="mt-3 max-w-3xl text-lg leading-8 text-nuit/70">{description}</p>
         ) : null}
-        {children ? <div className={title || description ? "mt-10" : ""}>{children}</div> : null}
+        {children ? <div className={title || description ? "mt-8" : ""}>{children}</div> : null}
       </Container>
     </section>
   );
 }
 
-/** Carte de contenu réutilisée dans les grilles (produits, formations, atouts). */
+/**
+ * Carte de contenu réutilisée dans les grilles (produits, formations, atouts).
+ *
+ * `id` sert de cible d'ancre : `scroll-mt` compense la hauteur de l'en-tête collant
+ * pour que le titre de la carte ne passe pas dessous à l'arrivée.
+ */
 export function Card({
   children,
   className = "",
+  id,
 }: {
   children: ReactNode;
   className?: string;
+  id?: string;
 }) {
   return (
     <article
-      className={`flex h-full flex-col rounded-2xl border border-miel-200/70 bg-white p-6 shadow-sm ${className}`}
+      id={id}
+      className={`flex h-full scroll-mt-28 flex-col rounded-2xl border border-miel-200/70 bg-white p-6 shadow-sm ${className}`}
     >
       {children}
     </article>
@@ -139,7 +147,7 @@ export function CtaBand({
   secondary?: { href: string; label: string };
 }) {
   return (
-    <section className="pb-20">
+    <section className="pb-14">
       <Container>
         <div className="flex flex-col gap-6 rounded-3xl bg-nuit px-8 py-10 text-creme sm:flex-row sm:items-center sm:justify-between">
           <div className="max-w-xl">
