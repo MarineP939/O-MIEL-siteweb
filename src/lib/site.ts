@@ -40,6 +40,12 @@ export const site = {
     legalForm: "Société civile d’exploitation agricole (SCEA)",
     siret: "000 000 000 00000", // TODO : SIRET réel, non fourni dans le document
     publicationDirector: "Benoît FOUCAN-PÉRAFIDE, gérant",
+    /**
+     * TODO : hébergeur non arrêté. Les valeurs ci-dessous sont un exemple et
+     * n'engagent rien. La loi impose de publier le nom, la raison sociale,
+     * l'adresse et le téléphone de l'hébergeur réel : à renseigner une fois
+     * le choix fait, avant toute mise en ligne.
+     */
     host: {
       name: "Vercel Inc.",
       address: "440 N Barranca Ave #4133, Covina, CA 91723, USA",
