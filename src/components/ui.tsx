@@ -1,6 +1,8 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
 
+import { cn } from "@/lib/cn";
+
 /** Conteneur horizontal commun à toutes les sections du site. */
 export function Container({
   children,
@@ -10,7 +12,7 @@ export function Container({
   className?: string;
 }) {
   return (
-    <div className={`mx-auto w-full max-w-6xl px-6 sm:px-8 lg:px-12 ${className}`}>{children}</div>
+    <div className={cn("mx-auto w-full max-w-6xl px-6 sm:px-8 lg:px-12", className)}>{children}</div>
   );
 }
 
@@ -52,7 +54,7 @@ export function Section({
   className?: string;
 }) {
   return (
-    <section className={`py-10 sm:py-14 ${className}`}>
+    <section className={cn("py-10 sm:py-14", className)}>
       <Container>
         {eyebrow ? (
           <p className="text-sm font-semibold uppercase tracking-[0.3em] text-miel-600">{eyebrow}</p>
@@ -89,7 +91,10 @@ export function Card({
   return (
     <article
       id={id}
-      className={`flex h-full scroll-mt-28 flex-col rounded-2xl border border-miel-200/70 bg-white p-6 shadow-sm ${className}`}
+      className={cn(
+        "flex h-full scroll-mt-28 flex-col rounded-2xl border border-miel-200/70 bg-white p-6 shadow-sm",
+        className,
+      )}
     >
       {children}
     </article>
@@ -116,7 +121,11 @@ export function ButtonLink({
   variant?: ButtonVariant;
   className?: string;
 }) {
-  const classes = `inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold transition ${buttonStyles[variant]} ${className}`;
+  const classes = cn(
+    "inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold transition",
+    buttonStyles[variant],
+    className,
+  );
   const isInternal = href.startsWith("/");
 
   if (isInternal) {
